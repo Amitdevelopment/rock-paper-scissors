@@ -1,30 +1,31 @@
 public class Result {
 
-    private Player winner;
+    private final Optional<Player> winner;
     private final boolean draw;
 
-    private Result(Player winner) {
-        this.winner = winner;
+    private Result () {
+        this.draw = true;
+        this.winner = Optional.absent();
+    }
+
+    private Result (Player winner) {
+        this.winner = Optional.of(winner);
         this.draw = false;
     }
 
-    private Result() {
-        this.draw = true;
+    public static Result draw () {
+        return new Result();
     }
 
-    public boolean isDraw() {
-        return draw;
-    }
-
-    public static Result win(Player winner) {
+    public static Result win (Player winner) {
         return new Result(winner);
     }
 
-    public Player getWinner() {
-        return winner;
+    public boolean hasWinner () {
+        return !draw;
     }
 
-    public static Result draw() {
-        return new Result();
+    public Player getWinner () {
+        return winner.get();
     }
 }
