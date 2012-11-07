@@ -1,17 +1,17 @@
 public abstract class Optional<T> {
-    public abstract T get ();
+    public abstract T get();
 
-    public static <T> Optional<T> absent () {
+    public static <T> Optional<T> absent() {
         return new None<T>();
     }
 
-    public static <T> Optional<T> of (final T payload) {
+    public static <T> Optional<T> of(final T payload) {
         return new Some<T>(payload);
     }
 
     private static class None<T> extends Optional<T> {
         @Override
-        public T get () {
+        public T get() {
             throw new IllegalStateException("The value is absent");
         }
     }
@@ -19,12 +19,12 @@ public abstract class Optional<T> {
     private static class Some<T> extends Optional<T> {
         private T payload;
 
-        public Some (final T payload) {
+        public Some(final T payload) {
             this.payload = payload;
         }
 
         @Override
-        public T get () {
+        public T get() {
             return payload;
         }
     }

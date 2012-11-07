@@ -3,29 +3,29 @@ public class Result {
     private final Optional<Player> winner;
     private final boolean draw;
 
-    private Result () {
+    private Result() {
         this.draw = true;
         this.winner = Optional.absent();
     }
 
-    private Result (Player winner) {
+    private Result(Player winner) {
         this.winner = Optional.of(winner);
         this.draw = false;
     }
 
-    public static Result draw () {
+    public static Result draw() {
         return new Result();
     }
 
-    public static Result win (Player winner) {
+    public static Result win(Player winner) {
         return new Result(winner);
     }
 
-    public boolean hasWinner () {
+    public boolean hasWinner() {
         return !draw;
     }
 
-    public Player getWinner () {
+    public Player getWinner() {
         return winner.get();
     }
 }
