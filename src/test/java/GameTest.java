@@ -41,4 +41,26 @@ public class GameTest {
         Result result = game.player1(Move.ROCK).player2(Move.ROCK).play();
         Assertions.assertThat(result.hasWinner()).isFalse();
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void whenThereIsADrawItIsIllegalToGetTheWinner() {
+        Game game = new Game();
+        Result result = game.player1(Move.ROCK).player2(Move.ROCK).play();
+        result.getWinner();
+    }
+
+    @Test
+    public void canPlayPlayerAgainstComputer() {
+        Game game = new Game();
+        Result result = game.player1(Move.ROCK).player2(MoveGenerator.generate()).play();
+        System.out.println(result);
+    }
+
+    @Test
+    public void canPlayComputerAgainstComputer() {
+        Game game = new Game();
+        Result result = game.player1(MoveGenerator.generate()).player2(MoveGenerator.generate()).play();
+        System.out.println(result);
+    }
+
 }

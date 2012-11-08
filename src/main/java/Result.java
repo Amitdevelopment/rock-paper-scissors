@@ -28,4 +28,8 @@ public class Result {
     public Player getWinner() {
         return winner.get();
     }
+
+    public String toString() {
+        return (draw) ? "Draw." : winner.get() + " won!";
+    }
 }
