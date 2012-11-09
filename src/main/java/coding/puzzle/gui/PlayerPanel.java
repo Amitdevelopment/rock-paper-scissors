@@ -11,7 +11,7 @@ class PlayerPanel extends JPanel {
     protected GameController gameController;
     protected final Label chosenMove = new Label();
 
-    public PlayerPanel(Player player, GameController gameController) {
+    public PlayerPanel(final Player player, final GameController gameController) {
         setLayout(new BorderLayout());
         this.player = player;
         this.gameController = gameController;
@@ -19,12 +19,12 @@ class PlayerPanel extends JPanel {
         gameController.setPlayerPanel(player, this);
     }
 
-    protected void displayMove(Move move) {
+    protected void displayMove(final Move move) {
         this.chosenMove.setText(player.getName() + " played: " + move.getName());
         updateUI();
     }
 
-    public void clearMove() {
+    public void clearMoveDisplay() {
         chosenMove.setText("");
     }
 }

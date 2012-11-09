@@ -10,7 +10,7 @@ public class GameController {
     private PlayerPanel player1Panel;
     private PlayerPanel player2Panel;
 
-    public void setPlayerMove(Player player, Move move) {
+    public void setPlayerMove(final Player player, final Move move) {
         if (!move1.isPresent() && !move2.isPresent()) resetDisplays();
 
         if (player == Player.PLAYER1) move1 = Optional.of(move);
@@ -21,14 +21,14 @@ public class GameController {
     }
 
     private void playMoves() {
-        Result result = game.player1(move1.get()).player2(move2.get()).play();
+        final Result result = game.player1(move1.get()).player2(move2.get()).play();
         resetMoves();
         gameWindow.showResult(result);
     }
 
     private void resetDisplays() {
-        player1Panel.clearMove();
-        player2Panel.clearMove();
+        player1Panel.clearMoveDisplay();
+        player2Panel.clearMoveDisplay();
         gameWindow.clearResult();
     }
 
@@ -37,11 +37,11 @@ public class GameController {
         move2 = Optional.absent();
     }
 
-    public void setGameWindow(GameWindow gameWindow) {
+    public void setGameWindow(final GameWindow gameWindow) {
         this.gameWindow = gameWindow;
     }
 
-    public void setPlayerPanel(Player player, PlayerPanel playerPanel) {
+    public void setPlayerPanel(final Player player, final PlayerPanel playerPanel) {
         if (player == Player.PLAYER1) player1Panel = playerPanel;
         else if (player == Player.PLAYER2) player2Panel = playerPanel;
     }

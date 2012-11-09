@@ -2,7 +2,7 @@ package coding.puzzle.gui;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
@@ -11,6 +11,6 @@ public class Main {
     }
 
     private static void createAndShowGUI() {
-        GameWindow gameWindow = new GameWindow();
+        new GameWindow();
     }
 }

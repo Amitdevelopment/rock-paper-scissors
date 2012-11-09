@@ -14,12 +14,11 @@ public class ComputerPlayerPanel extends PlayerPanel {
         super(player, gameController);
         setBorder(BorderFactory.createTitledBorder("Robot player"));
 
-        JButton button = new JButton("Secret computer move");
+        final JButton button = new JButton("Secret computer move");
         add(button);
-        button.setBounds(50, 60, 80, 30);
         button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Move move = MoveGenerator.generate();
+            public void actionPerformed(final ActionEvent event) {
+                final Move move = MoveGenerator.generate();
                 gameController.setPlayerMove(player, move);
                 displayMove(move);
             }
