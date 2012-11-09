@@ -1,3 +1,5 @@
+package coding.puzzle.domain;
+
 public abstract class Optional<T> {
     public abstract T get();
 
@@ -9,10 +11,17 @@ public abstract class Optional<T> {
         return new Some<T>(payload);
     }
 
+    abstract public boolean isPresent();
+
     private static class None<T> extends Optional<T> {
         @Override
         public T get() {
             throw new IllegalStateException("The value is absent");
+        }
+
+        @Override
+        public boolean isPresent() {
+            return false;
         }
     }
 
@@ -26,6 +35,11 @@ public abstract class Optional<T> {
         @Override
         public T get() {
             return payload;
+        }
+
+        @Override
+        public boolean isPresent() {
+            return true;
         }
     }
 }

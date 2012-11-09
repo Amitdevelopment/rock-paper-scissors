@@ -1,3 +1,5 @@
+package coding.puzzle.domain;
+
 public class Game {
     private Move player1Move;
     private Move player2Move;

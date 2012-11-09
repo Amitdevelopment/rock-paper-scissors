@@ -1,5 +1,8 @@
+package coding.puzzle.domain;
+
 import org.fest.assertions.Assertions;
 import org.junit.Test;
+import coding.puzzle.domain.*;
 
 public class GameTest {
 
@@ -62,5 +65,11 @@ public class GameTest {
         Result result = game.player1(MoveGenerator.generate()).player2(MoveGenerator.generate()).play();
         System.out.println(result);
     }
+    /**
+     * TODO:
+     *  UI
+     *  type-safety in game play (set both players)
+     *  player vs computer (make it impossible to be player1 and then player2) and computer vs computer
+     */
 
 }

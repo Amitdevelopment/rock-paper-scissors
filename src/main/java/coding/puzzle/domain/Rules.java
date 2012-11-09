@@ -1,3 +1,5 @@
+package coding.puzzle.domain;
+
 public class Rules {
     private static int n = Move.values().length;
     private static final int[][] winner = new int[n][n];

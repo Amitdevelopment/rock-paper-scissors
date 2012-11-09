@@ -1,3 +1,5 @@
+package coding.puzzle.domain;
+
 import java.util.Random;
 
 public class MoveGenerator {

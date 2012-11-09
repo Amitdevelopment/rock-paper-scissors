@@ -1,3 +1,5 @@
+package coding.puzzle.domain;
+
 public class Result {
 
     private final Optional<Player> winner;
@@ -30,6 +32,6 @@ public class Result {
     }
 
     public String toString() {
-        return (draw) ? "Draw." : winner.get() + " won!";
+        return (draw) ? "Draw." : winner.get().getName() + " won!";
     }
 }
