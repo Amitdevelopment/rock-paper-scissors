@@ -6,7 +6,6 @@ public class GameController {
     int scorePlayer1 = 0, scorePlayer2 = 0;
     private Optional<Move> move1 = Optional.absent();
     private Optional<Move> move2 = Optional.absent();
-    private final Game game = new Game();
     private GameWindow gameWindow;
     private PlayerPanel player1Panel;
     private PlayerPanel player2Panel;
@@ -22,7 +21,7 @@ public class GameController {
     }
 
     private void playMoves() {
-        final Result result = game.player1(move1.get()).player2(move2.get()).play();
+        Result result = Game.play(Game.newMove().player1(move1.get()).player2(move2.get()));
         if (result.hasWinner()) {
             Player winner = result.getWinner();
             if (winner == Player.PLAYER1) scorePlayer1++;
