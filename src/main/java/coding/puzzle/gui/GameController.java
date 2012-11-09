@@ -3,6 +3,7 @@ package coding.puzzle.gui;
 import coding.puzzle.domain.*;
 
 public class GameController {
+    int scorePlayer1 = 0, scorePlayer2 = 0;
     private Optional<Move> move1 = Optional.absent();
     private Optional<Move> move2 = Optional.absent();
     private final Game game = new Game();
@@ -22,6 +23,12 @@ public class GameController {
 
     private void playMoves() {
         final Result result = game.player1(move1.get()).player2(move2.get()).play();
+        if (result.hasWinner()) {
+            Player winner = result.getWinner();
+            if (winner == Player.PLAYER1) scorePlayer1++;
+            else if (winner == Player.PLAYER2) scorePlayer2++;
+            gameWindow.showScore(scorePlayer1, scorePlayer2);
+        }
         resetMoves();
         gameWindow.showResult(result);
     }
