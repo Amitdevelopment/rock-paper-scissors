@@ -5,15 +5,17 @@ import coding.puzzle.domain.Result;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class GameWindow extends JFrame {
     private JMenuBar menuBar;
     private JMenu menu;
-    private final PlayerPanel player1Panel;
+    private PlayerPanel player1Panel;
     private final PlayerPanel player2Panel;
     private final Label resultAnnouncement;
-    private boolean isComputerVsPlayer = true;
+    private final GameController gameController;
+    private final JPanel playersPanel;
 
     public GameWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,10 +32,10 @@ public class GameWindow extends JFrame {
 
         addSettingsMenu();
 
-        GameController gameController = new GameController();
+        gameController = new GameController();
         gameController.setGameWindow(this);
 
-        JPanel playersPanel = new JPanel();
+        playersPanel = new JPanel();
         add(playersPanel, BorderLayout.WEST);
         playersPanel.setLayout(new FlowLayout());
 
@@ -51,8 +53,8 @@ public class GameWindow extends JFrame {
         menu.getAccessibleContext().setAccessibleDescription("Set the type of game");
         menuBar.add(menu);
 
-        ButtonGroup group = new ButtonGroup();
-        final JRadioButtonMenuItem playerVsComputerMenuItem = new JRadioButtonMenuItem("Player vs Computer");
+        final ButtonGroup group = new ButtonGroup();
+        final JRadioButtonMenuItem playerVsComputerMenuItem = new JRadioButtonMenuItem(new PlayerVsComputerAction());
 
         playerVsComputerMenuItem.setSelected(true);
         playerVsComputerMenuItem.setMnemonic(KeyEvent.VK_P);
@@ -60,7 +62,7 @@ public class GameWindow extends JFrame {
 
         menu.add(playerVsComputerMenuItem);
 
-        final JRadioButtonMenuItem computerVsComputerMenuItem = new JRadioButtonMenuItem("Computer vs Computer");
+        final JRadioButtonMenuItem computerVsComputerMenuItem = new JRadioButtonMenuItem(new ComputerVsComputer());
         computerVsComputerMenuItem.setMnemonic(KeyEvent.VK_C);
         group.add(computerVsComputerMenuItem);
 
@@ -77,4 +79,38 @@ public class GameWindow extends JFrame {
     public void clearResult() {
         resultAnnouncement.setText("");
     }
+
+    private class ComputerVsComputer extends AbstractAction {
+        public ComputerVsComputer() {
+            super("Computer vs Computer");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            player1Panel = new ComputerPlayerPanel(Player.PLAYER1, gameController);
+            recreatePlayersPanel();
+        }
+    }
+
+    private class PlayerVsComputerAction extends AbstractAction {
+
+        public PlayerVsComputerAction() {
+            super("Player vs Computer");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            player1Panel = new HumanPlayerPanel(Player.PLAYER1, gameController);
+            recreatePlayersPanel();
+        }
+    }
+
+    private void recreatePlayersPanel() {
+        playersPanel.removeAll();
+        playersPanel.add(player1Panel);
+        playersPanel.add(player2Panel);
+        playersPanel.revalidate();
+        player2Panel.clearMoveDisplay();
+    }
+
 }
